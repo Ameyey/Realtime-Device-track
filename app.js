@@ -16,6 +16,9 @@ io.on("connection",function(socket){
     io.emit("receive-location", { id:socket.id , ...data });
   });
   console.log("connection");
+  socket.on("disconnect",()=>{
+    io.emit("user-discounted",socket.id);
+  })
 }); 
 
 

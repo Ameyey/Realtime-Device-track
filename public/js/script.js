@@ -32,4 +32,8 @@ socket.on("receive-location",function(data){
     else{
       markers[id]=L.marker([latitude ,longitude]).addTo(map);
     }
+});
+
+socket.on("disconnect",(id)=>{
+
 })
