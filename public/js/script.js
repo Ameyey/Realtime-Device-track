@@ -24,7 +24,7 @@ L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
 const markers = {};
 
 socket.on("receive-location",function(data){
-    const {id , latitude , longitude}  =data;
+    const {id,latitude,longitude}  =data;
     map.setView([latitude, longitude],16);
     if(markers[id]){
       markers[id].setLatLng([latitude ,longitude]);
@@ -34,6 +34,9 @@ socket.on("receive-location",function(data){
     }
 });
 
-socket.on("disconnect",(id)=>{
-
-})
+socket.on("user-discounted", (id) => {
+  if (markers[id]) {
+    map.removeLayer(markers[id]);
+    delete markers[id];
+  }
+});
